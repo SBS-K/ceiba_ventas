@@ -1,0 +1,21 @@
+jasypt:
+   encryptor:
+      password: ${jasyptpwd:secretkey}
+      algorithm: PBEWithMD5AndDES
+
+server:
+   port: 
+   servlet:
+      context-path: /adn
+      session:
+         timeout: 21600s
+
+spring:
+   datasource:
+      driver-class-name: org.postgresql.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:postgresql://localhost:5432/adn-java
+      username: postgres
+      password: ENC(WFKCtr8xFNFWuCm+Y7acYYzMWigoCoLw)
+      hikari:
+         poolName: pool
