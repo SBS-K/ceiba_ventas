@@ -11,4 +11,3 @@ public class ServicioEliminarDetalleCompra {
 
     public void ejecutar(Long id) { this.repositorioDetalleCompra.eliminar(id); }
 }
-k
