@@ -15,8 +15,8 @@ public class DtoArticulo {
     private String descripcion;
     private Double precio;
     private Categoria categoria;
-    private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaActualizacion;
-    private Boolean Estado;
+//    private LocalDateTime fechaCreacion;
+//    private LocalDateTime fechaActualizacion;
+//    private Boolean Estado;
 
 }

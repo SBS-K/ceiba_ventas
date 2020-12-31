@@ -19,10 +19,10 @@ public class ServicioCrearArticulo {
         return this.repositorioArticulo.crear(articulo);
     }
 
-    private void validarExistenciaPrevia(Articulo articulo) {
-        boolean existe = this.repositorioArticulo.existeConCategoria(articulo.getNombre(), articulo.getCategoria());
-        if(existe) {
-            throw new ExcepcionDuplicidad(EL_ARITUCLO_YA_EXISTE_EN_EL_SISTEMA);
-        }
-    }
+//    private void validarExistenciaPrevia(Articulo articulo) {
+//        boolean existe = this.repositorioArticulo.existeConCategoria(articulo.getNombre(), articulo.getCategoria());
+//        if(existe) {
+//            throw new ExcepcionDuplicidad(EL_ARITUCLO_YA_EXISTE_EN_EL_SISTEMA);
+//        }
+//    }
 }
