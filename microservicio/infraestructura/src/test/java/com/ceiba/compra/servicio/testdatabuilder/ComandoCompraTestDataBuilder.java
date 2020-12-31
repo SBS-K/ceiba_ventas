@@ -1,4 +1,4 @@
-package com.ceiba.usuario.servicio.testdatabuilder;
+package com.ceiba.compra.servicio.testdatabuilder;
 
 import com.ceiba.compra.comando.ComandoCompra;
 import com.ceiba.detalle_compra.modelo.entidad.DetalleCompra;
@@ -18,14 +18,13 @@ public class ComandoCompraTestDataBuilder {
     private LocalDateTime fechaEnvio;
     private EstadoCompra estadoCompra;
 
-    public ComandoCompraTestDataBuilder(Long id, Long numeroFactura, Double costoTotal, LocalDateTime fechaCompra, LocalDateTime fechaEnvio, EstadoCompra estadoCompra) {
-        this.id = id;
+    public ComandoCompraTestDataBuilder() {
         this.numeroFactura = 4567L;
-        this.costoTotal = costoTotal;
+        this.costoTotal = 200000.00;
         this.listaDetalles = new LinkedList<>();
         this.fechaCompra = LocalDateTime.now();
         this.fechaEnvio = LocalDateTime.now();
-        this.estadoCompra = estadoCompra;
+        this.estadoCompra = new EstadoCompra(2L, "TestEstadoCompra", "DescripcionEstadoCompra");
     }
 
     public ComandoCompra build() {

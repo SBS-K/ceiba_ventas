@@ -11,7 +11,6 @@ import java.util.List;
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
 @Getter
-@Setter
 public class Compra {
 
     private static final String EL_NUMERO_DE_COMPRA_DEBE_SER_MAYOR_A_CERO = "El precio del articulo debe ser mayor a cero";
@@ -50,5 +49,7 @@ public class Compra {
         this.fechaCompra = fechaCompra;
         this.estadoCompra = estadoCompra;
     }
+
+    // Agregar setter solo a los campos que puedan cambiar tal como si fuera en la vida real
 
 }

@@ -7,9 +7,7 @@ import com.ceiba.dominio.excepcion.ExcepcionDevolucion;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import org.springframework.stereotype.*;
 
-@Component
 public class ServicioActualizarCompra {
 
     private static final String LA_COMPRA_YA_EXISTE_EN_EL_SISTEMA = "La compra ya existe en el sistema";

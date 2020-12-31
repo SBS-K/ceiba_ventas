@@ -1,6 +1,7 @@
 package com.ceiba.persistencia.compra.adaptador.dao;
 
 import com.ceiba.compra.modelo.dto.DtoCompra;
+import com.ceiba.detalle_compra.modelo.dto.DtoDetalleCompra;
 import com.ceiba.detalle_compra.modelo.entidad.DetalleCompra;
 import com.ceiba.estado_compra.modelo.entidad.EstadoCompra;
 import com.ceiba.infraestructura.jdbc.MapperResult;
@@ -21,7 +22,14 @@ public class MapeoCompra implements RowMapper<DtoCompra>, MapperResult {
         Double costoTotal = resultSet.getDouble("costo_total");
         EstadoCompra estadoCompra = (EstadoCompra) resultSet.getObject("estado_compra_id");
         LocalDateTime fechaEnvio = extraerLocalDateTime(resultSet, "fecha_envio");
+
+        while(resultSet) {
+            DtoDetalleCompra dtoDetalleCompra;
+            Double costoTotal = resultSet.getDouble("id");
+            Double costoTotal = resultSet.getDouble("articulo");
+            Double costoTotal = resultSet.getDouble("");
 //        List<DetalleCompra> listaDetalles = resultSet.getArray("detalle_compra_id");
+        }
 
         return new DtoCompra(id, numeroFactura, costoTotal, null, fechaEnvio, estadoCompra);
     }
