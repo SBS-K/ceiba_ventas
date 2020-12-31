@@ -4,6 +4,7 @@ package com.ceiba.articulo.puerto.repositorio;
 import com.ceiba.articulo.modelo.entidad.Articulo;
 import com.ceiba.categoria.modelo.entidad.Categoria;
 
+
 public interface RepositorioArticulo {
 
     /**

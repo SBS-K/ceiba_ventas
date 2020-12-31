@@ -75,6 +75,7 @@ dependencies {
 	implementation project.ext.flyway
 
 	implementation project(':infraestructura')
+
 }
 
 bootJar {

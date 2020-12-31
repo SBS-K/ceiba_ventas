@@ -11,8 +11,8 @@ public class DtoCategoria {
     private Long id;
     private String nombre;
     private String descripcion;
-    private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaActualizacion;
-    private Boolean Estado;
+//    private LocalDateTime fechaCreacion;
+//    private LocalDateTime fechaActualizacion;
+//    private Boolean Estado;
 
 }

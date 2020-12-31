@@ -12,8 +12,8 @@ public class ServicioActualizarDetalleCompra {
         this.repositorioDetalleCompra = repositorioDetalleCompra;
     }
 
-    public Long ejecutar(DetalleCompra detalleCompra) {
-        return this.repositorioDetalleCompra.crear(detalleCompra);
+    public void ejecutar(DetalleCompra detalleCompra) {
+        this.repositorioDetalleCompra.crear(detalleCompra);
     }
 
 }
