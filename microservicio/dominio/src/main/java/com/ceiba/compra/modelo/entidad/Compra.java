@@ -1,11 +1,10 @@
 package com.ceiba.compra.modelo.entidad;
 
-import com.ceiba.estado_compra.modelo.entidad.EstadoCompra;
 import lombok.Getter;
 import com.ceiba.detalle_compra.modelo.entidad.DetalleCompra;
-import lombok.Setter;
-
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.ceiba.dominio.ValidadorArgumento.*;
@@ -21,35 +20,101 @@ public class Compra {
     private static final String EL_COSTO_TOTAL_DEBE_SER_MAYOR_A_CERO = "El costo total debe ser mayor a cero";
     private static final String LA_LISTA_DE_DETALLES_DE_COMPRA_NO_DEBE_SER_VACIA = "La lista de detalles de compra no debe ser vacia";
 
+    // Horas de envio
+    private static final Integer HORA_COMIENZO_DE_ENVIOS = 8;
+    private static final Integer MINUTOS_COMIENZO_DE_ENVIOS = 0;
+    private static final Integer MINUTOS_HASTA_REALIZAR_ENVIOS = 15;
+
+    // Otros
+    private static final Integer UN_DIA = 1;
+    private static final Integer PORCENTAJE_RECARGO = 4;
+
+    // Fin de semana
+    private static final int SATURDAY = 6;
+    private static final int SUNDAY = 7;
+
     private Long id;
     private Long numeroFactura;
     private Double costoTotal;
+    private String estadoCompra;
     private List<DetalleCompra> listaDetalles;
     private LocalDateTime fechaCompra;
     private LocalDateTime fechaEnvio;
-    private EstadoCompra estadoCompra;
-    private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaActualizacion;
-    private Boolean Estado;
 
-
-    public Compra(Long id, Long numeroFactura, Double costoTotal, List<DetalleCompra> listaDetalles, LocalDateTime fechaCompra, EstadoCompra estadoCompra) {
+    public Compra(Long id, Long numeroFactura, Double costoTotal, String estadoCompra, List<DetalleCompra> listaDetalles, LocalDateTime fechaCompra) {
         validarPositivoLong(numeroFactura, EL_NUMERO_DE_COMPRA_DEBE_SER_MAYOR_A_CERO);
         validarObligatorio(numeroFactura, SE_DEBE_INGRESAR_EL_NUMERO_DE_LA_FACTURA);
         validarPositivo(costoTotal, EL_COSTO_TOTAL_DEBE_SER_MAYOR_A_CERO);
         validarObligatorio(costoTotal, SE_DEBE_INGRESAR_EL_COSTO_TOTAL);
-        validarObligatorio(estadoCompra, SE_DEBE_INGRESAR_EL_ESTADO_COMPRA);
         validarObligatorio(fechaCompra, SE_DEBE_INGRESAR_LA_FECHA_COMPRA);
-        validarNoVacio(listaDetalles, LA_LISTA_DE_DETALLES_DE_COMPRA_NO_DEBE_SER_VACIA);
+        //validarNoVacio(listaDetalles, LA_LISTA_DE_DETALLES_DE_COMPRA_NO_DEBE_SER_VACIA);
 
         this.id = id;
         this.numeroFactura = numeroFactura;
-        this.costoTotal = costoTotal;
+        this.costoTotal = siTieneRecargoCalcularCostoToal(fechaCompra, costoTotal);
+        this.estadoCompra = estadoCompra;
         this.listaDetalles = listaDetalles;
         this.fechaCompra = fechaCompra;
-        this.estadoCompra = estadoCompra;
+        this.fechaEnvio = calcularFechaEnvio(fechaCompra);
     }
 
-    // Agregar setter solo a los campos que puedan cambiar tal como si fuera en la vida real
+    // Setter
+    public void setEstadoCompra(String estadoCompra) { this.estadoCompra = estadoCompra; }
+
+    public void setFechaEnvio(LocalDateTime fechaEnvio) {
+        this.fechaEnvio = fechaEnvio;
+    }
+
+    public void setListaDetalles(List<DetalleCompra> listaDetalles) {
+        this.listaDetalles = listaDetalles;
+    }
+
+    // Add
+    public void addDetalleCompra(DetalleCompra detalleCompra) { this.listaDetalles.add(detalleCompra); }
+
+    // Comportamiento
+    private LocalDateTime calcularFechaEnvio(LocalDateTime fechaCompra) {
+
+        LocalDateTime fechaEnvio = null;
+        if( esMayorALas6PmYMenorALas12AM(fechaCompra) ) { fechaEnvio = fechaCompra.plusDays(UN_DIA).withHour(HORA_COMIENZO_DE_ENVIOS).withMinute(MINUTOS_COMIENZO_DE_ENVIOS); }
+        else if ( esMayorALas12AMYMenorALas8AM (fechaCompra) ) { fechaEnvio = fechaCompra.withMinute(HORA_COMIENZO_DE_ENVIOS).withMinute(MINUTOS_COMIENZO_DE_ENVIOS); }
+        else { fechaEnvio = fechaCompra.plusMinutes(MINUTOS_HASTA_REALIZAR_ENVIOS); }
+        return fechaEnvio;
+    }
+
+    private boolean esMayorALas6PmYMenorALas12AM(LocalDateTime fechaEnvio) {
+        LocalDateTime seisPm = LocalDateTime.now().withHour(18).withMinute(0);
+        LocalDateTime finalDelDiaActual = LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT);
+
+        return fechaEnvio.isAfter(seisPm) && fechaEnvio.isBefore(finalDelDiaActual) ? true : false;
+    }
+
+    private boolean esMayorALas12AMYMenorALas8AM(LocalDateTime fechaEnvio) {
+        LocalDateTime doceAm = LocalDateTime.now().withHour(12).withMinute(1);
+        LocalDateTime ochoAm = LocalDateTime.now().withHour(8).withMinute(0);
+
+        return fechaEnvio.isAfter(doceAm) && fechaEnvio.isBefore(ochoAm) ? true : false;
+    }
+
+    // Calculo de recargo
+    private Double siTieneRecargoCalcularCostoToal(LocalDateTime fechaCompra, Double costoTotal) {
+        double costoFinal = costoTotal;
+        if( esFinDeSemana(fechaCompra) && esMenorADocientosMilPesos(costoTotal) ) {
+            costoFinal = calcularCostoTotalConPorcentajeRecargo(costoTotal);
+        }
+        return costoFinal;
+    }
+
+    private Double calcularCostoTotalConPorcentajeRecargo(Double costoTotal) {
+        return (costoTotal + ( (costoTotal * PORCENTAJE_RECARGO) / 100 ) );
+    }
+
+    private boolean esMenorADocientosMilPesos(Double costoTotal) {
+        return costoTotal < 200000 ? true : false;
+    }
+
+    private boolean esFinDeSemana(LocalDateTime fechaCompra) {
+        return (fechaCompra.getDayOfWeek().getValue() == SATURDAY || fechaCompra.getDayOfWeek().getValue() == SUNDAY) ? true : false;
+    }
 
 }

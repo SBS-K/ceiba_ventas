@@ -1,7 +1,6 @@
 package com.ceiba.compra.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.persistencia.compra.controlador.ConsultaControladorCompra;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,8 @@ public class ConsultaControladorCompraTest {
         mocMvc.perform(get("/compras")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].numeroFactura", is(4567L)));
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].numeroFactura", is(12345)));
     }
 
 }

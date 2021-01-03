@@ -12,4 +12,10 @@ public interface DaoDetalleCompra {
      */
     List<DtoDetalleCompra> listar();
 
+    /**
+     * Permite listar detalles de compra por Id de Compra
+     * @return los detalle compra
+     */
+    List<DtoDetalleCompra> listarByIdCompra(Long compraId);
+
 }

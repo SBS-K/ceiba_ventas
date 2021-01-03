@@ -1,15 +1,12 @@
 package com.ceiba.detalle_compra.comando.manejador;
 
-import com.ceiba.ComandoRespuesta;
-import com.ceiba.detalle_compra.comando.ComandoDetalleCompra;
 import com.ceiba.detalle_compra.comando.fabrica.FabricaDetalleCompra;
-import com.ceiba.detalle_compra.modelo.entidad.DetalleCompra;
-import com.ceiba.detalle_compra.servicio.ServicioActualizarDetalleCompra;
 import com.ceiba.detalle_compra.servicio.ServicioEliminarDetalleCompra;
+import com.ceiba.manejador.ManejadorComando;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorEliminarDetalleCompra {
+public class ManejadorEliminarDetalleCompra implements ManejadorComando<Long> {
 
     private final FabricaDetalleCompra detalleCompra;
     private final ServicioEliminarDetalleCompra servicioEliminarDetalleCompra;

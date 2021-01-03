@@ -3,8 +3,6 @@ package com.ceiba.compra.controlador;
 import com.ceiba.ApplicationMock;
 import com.ceiba.compra.comando.ComandoCompra;
 import com.ceiba.compra.servicio.testdatabuilder.ComandoCompraTestDataBuilder;
-import com.ceiba.persistencia.compra.controlador.ComandoControladorCompra;
-import com.ceiba.usuario.comando.ComandoUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +13,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,6 +23,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes= ApplicationMock.class)
 @WebMvcTest(ComandoControladorCompra.class)
 public class ComandoControladorCompraTest {
+
+    private static final Long COMPRA_ID = 1L;
+    private static final Double COSTO_TOTAL = 180000.00;
+    private static final String ESTADO_COMPRA = "Compra Finalizada";
+    private static final LocalDateTime FECHA_COMPRA = LocalDateTime.now();
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -33,36 +38,36 @@ public class ComandoControladorCompraTest {
     @Test
     public void crear() throws Exception{
         // arrange
-        ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
+        ComandoCompra compra = new ComandoCompraTestDataBuilder()
+                .conId(COMPRA_ID)
+                .build();
 
         // act - assert
         mocMvc.perform(post("/compras")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(compra)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 3}"));
+                .andExpect(content().json("{'valor': 4}"));
     }
 
     @Test
     public void actualizar() throws Exception{
         // arrange
-        Long id = 3L;
-        ComandoCompra usuario = new ComandoCompraTestDataBuilder().build();
+        ComandoCompra comandoCompra = new ComandoCompraTestDataBuilder().build();
 
         // act - assert
-        mocMvc.perform(put("/compras/{id}",id)
+        mocMvc.perform(put("/compras/{id}", COMPRA_ID)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(usuario)))
+                .content(objectMapper.writeValueAsString(comandoCompra)))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void eliminar() throws Exception {
         // arrange
-        Long id = 3L;
 
         // act - assert
-        mocMvc.perform(delete("/compras/{id}",id)
+        mocMvc.perform(delete("/compras/{id}", COMPRA_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

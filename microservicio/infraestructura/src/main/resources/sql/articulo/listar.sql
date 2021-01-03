@@ -1,4 +1,4 @@
-SELECT id, nombre, descripcion, precio, categoria_id
+SELECT id, nombre, descripcion, precio
 FROM articulo
 
 

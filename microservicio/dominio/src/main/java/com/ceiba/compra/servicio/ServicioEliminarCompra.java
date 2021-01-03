@@ -4,7 +4,6 @@ import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import org.springframework.stereotype.*;
 
-@Component
 public class ServicioEliminarCompra {
 
     private final RepositorioCompra repositorioCompra;

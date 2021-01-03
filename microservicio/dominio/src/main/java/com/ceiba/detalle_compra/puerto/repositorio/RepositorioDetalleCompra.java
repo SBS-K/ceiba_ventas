@@ -12,12 +12,6 @@ public interface RepositorioDetalleCompra {
     Long crear(DetalleCompra detalleCompra);
 
     /**
-     * Permite actualizar un detalle compra
-     * @param detalleCompra
-     */
-    void actualizar(DetalleCompra detalleCompra);
-
-    /**
      * Permite eliminar un detalle compra
      * @param id
      */

@@ -14,7 +14,5 @@ public class DtoDetalleCompra {
     private Articulo articulo;
     private Integer cantidad;
     private Double subtotal;
-//    private LocalDateTime fechaCreacion;
-//    private LocalDateTime fechaActualizacion;
-//    private Boolean Estado;
+
 }

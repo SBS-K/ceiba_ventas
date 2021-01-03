@@ -19,19 +19,5 @@ public class ServicioCrearCompraTest {
         repositorioCompra = mock(RepositorioCompra.class);
     }
 
-    @Test
-    public void calcularFechaDeEnvioTest(){
 
-        // Arrange
-
-
-        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(this.repositorioCompra);
-
-        // Act
-        Date fechaEnvio = servicioCrearCompra.calcularFechaEnvio();
-
-        // Assert
-        assertNotNull(fechaEnvio);
     }
-
-}

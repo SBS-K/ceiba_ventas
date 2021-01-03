@@ -20,7 +20,7 @@ public class ServicioActualizarCompra {
 
     public void ejecutar(Compra compra) {
         validarExistenciaPrevia(compra);
-        if ( esDevolucion(compra.getEstadoCompra().getNombre()) && pasaronVeintiCuatroHoraDesdeCompra(compra.getFechaCompra()) ) {
+        if ( esDevolucion(compra.getEstadoCompra()) && pasaronVeintiCuatroHoraDesdeCompra(compra.getFechaCompra()) ) {
             throw new ExcepcionDevolucion(NO_SE_PUEDE_HACE_DEVOLUCION_VEINTICUATRO_HORAS_DESPUES);
         }
         this.repositorioCompra.actualizar(compra);

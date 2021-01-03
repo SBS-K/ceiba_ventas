@@ -11,7 +11,6 @@ import static com.ceiba.dominio.ValidadorArgumento.validarPositivo;
 import static com.ceiba.dominio.ValidadorArgumento.validarPositivoInteger;
 
 @Getter
-@AllArgsConstructor
 public class DetalleCompra {
 
     private static final String SE_DEBE_INGRESAR_UN_ARTICULO = "Se debe ingresar un articulo";
@@ -24,9 +23,6 @@ public class DetalleCompra {
     private Articulo articulo;
     private Integer cantidad;
     private Double subtotal;
-    private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaActualizacion;
-    private Boolean Estado;
 
     public DetalleCompra(Long id, Articulo articulo, Integer cantidad, Double subtotal) {
         validarObligatorio(articulo, SE_DEBE_INGRESAR_UN_ARTICULO);
