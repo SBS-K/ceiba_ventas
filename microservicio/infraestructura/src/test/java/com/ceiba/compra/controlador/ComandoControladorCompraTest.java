@@ -24,10 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(ComandoControladorCompra.class)
 public class ComandoControladorCompraTest {
 
-    private static final Long COMPRA_ID = 1L;
-    private static final Double COSTO_TOTAL = 180000.00;
-    private static final String ESTADO_COMPRA = "Compra Finalizada";
-    private static final LocalDateTime FECHA_COMPRA = LocalDateTime.now();
+    private static final Long COMPRA_ID = 2L;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -39,9 +36,8 @@ public class ComandoControladorCompraTest {
     public void crear() throws Exception{
         // arrange
         ComandoCompra compra = new ComandoCompraTestDataBuilder()
-                .conId(COMPRA_ID)
+                .conListaDetallesAutoGenerada()
                 .build();
-
         // act - assert
         mocMvc.perform(post("/compras")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -53,7 +49,10 @@ public class ComandoControladorCompraTest {
     @Test
     public void actualizar() throws Exception{
         // arrange
-        ComandoCompra comandoCompra = new ComandoCompraTestDataBuilder().build();
+        ComandoCompra comandoCompra = new ComandoCompraTestDataBuilder()
+                .conId(2L)
+                .conNumeroFactura(12346L)
+                .build();
 
         // act - assert
         mocMvc.perform(put("/compras/{id}", COMPRA_ID)

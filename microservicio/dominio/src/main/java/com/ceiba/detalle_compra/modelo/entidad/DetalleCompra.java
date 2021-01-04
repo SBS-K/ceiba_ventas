@@ -1,8 +1,10 @@
 package com.ceiba.detalle_compra.modelo.entidad;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
 import com.ceiba.articulo.modelo.entidad.Articulo;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +13,7 @@ import static com.ceiba.dominio.ValidadorArgumento.validarPositivo;
 import static com.ceiba.dominio.ValidadorArgumento.validarPositivoInteger;
 
 @Getter
+@NoArgsConstructor
 public class DetalleCompra {
 
     private static final String SE_DEBE_INGRESAR_UN_ARTICULO = "Se debe ingresar un articulo";

@@ -1,4 +1,4 @@
-package com.ceiba.compra.controlador;
+package com.ceiba.articulo.controlador;
 
 import com.ceiba.ApplicationMock;
 import org.junit.Test;
@@ -18,8 +18,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
-@WebMvcTest(ConsultaControladorCompra.class)
-public class ConsultaControladorCompraTest {
+@WebMvcTest(ConsultaControladorArticuloTest.class)
+public class ConsultaControladorArticuloTest {
+
+    private static final String ARTICULO_NOMBRE = "Vaso modificado";
 
     @Autowired
     private MockMvc mocMvc;
@@ -29,11 +31,11 @@ public class ConsultaControladorCompraTest {
         // arrange
 
         // act - assert
-        mocMvc.perform(get("/compras")
+        mocMvc.perform(get("/articulos")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(4)))
-                .andExpect(jsonPath("$[0].numeroFactura", is(12345)));
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].nombre", is(ARTICULO_NOMBRE)));
     }
 
 }

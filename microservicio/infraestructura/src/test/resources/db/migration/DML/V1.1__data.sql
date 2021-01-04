@@ -1,50 +1,4 @@
 
-CREATE TABLE usuario (
- id IDENTITY PRIMARY KEY,
- nombre varchar(100) NOT NULL,
- clave varchar(45) NOT NULL,
- fecha_creacion TIMESTAMP null
-);
-
-CREATE TABLE articulo (
-    id IDENTITY PRIMARY KEY,
-    nombre varchar(20) NOT NULL,
-    descripcion varchar(20) null,
-    precio NUMERIC (15, 2) NOT NULL
-);
-
-CREATE TABLE detalle_compra (
-    id IDENTITY PRIMARY KEY,
-    articulo_id int NOT NULL,
-    cantidad int NOT NULL,
-    subtotal NUMERIC (15, 2) NOT NULL
-);
-ALTER TABLE detalle_compra
-    ADD FOREIGN KEY (articulo_id)
-    REFERENCES articulo (id);
-
-CREATE TABLE compra (
-    id IDENTITY PRIMARY KEY,
-    numero_factura bigint auto_increment NOT NULL,
-    costo_total NUMERIC (15, 2) NOT NULL,
-    estado_compra varchar(20) NOT NULL,
-    fecha_compra TIMESTAMP NOT NULL,
-    fecha_envio TIMESTAMP null
-);
-
-CREATE TABLE compra_detalle_compra (
-  id IDENTITY PRIMARY KEY,
-  compra_id INTEGER NOT NULL,
-  detalle_compra_id INTEGER NOT NULL
-);
-
-ALTER TABLE compra_detalle_compra
-    ADD FOREIGN KEY (compra_id)
-         REFERENCES compra (id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE compra_detalle_compra
-    ADD FOREIGN KEY (detalle_compra_id)
-         REFERENCES detalle_compra (id) ON UPDATE CASCADE ON DELETE CASCADE;
-
 INSERT INTO articulo (id, nombre, descripcion, precio) VALUES (1, 'Vaso modificado', 'Vaso modificado', 30000);
 INSERT INTO articulo (id, nombre, descripcion, precio) VALUES (2, 'Camisa modificado', 'Camisa modificado', 50000);
 INSERT INTO articulo (id, nombre, descripcion, precio) VALUES (3, 'Peluche', 'Peluche', 70000);
@@ -71,4 +25,4 @@ INSERT INTO compra_detalle_compra (id, compra_id, detalle_compra_id) VALUES (3, 
 INSERT INTO compra_detalle_compra (id, compra_id, detalle_compra_id) VALUES (4, 2, 4);
 INSERT INTO compra_detalle_compra (id, compra_id, detalle_compra_id) VALUES (5, 3, 5);
 
-INSERT INTO usuario(nombre,clave,fecha_creacion) VALUES ('test','1234',now())
+INSERT INTO usuario(nombre,clave,fecha_creacion) VALUES ('test','1234',now());

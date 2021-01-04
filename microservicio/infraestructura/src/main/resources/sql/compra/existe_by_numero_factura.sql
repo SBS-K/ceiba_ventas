@@ -1,0 +1,1 @@
+select count(*) from compra where numero_factura = :numeroFactura;

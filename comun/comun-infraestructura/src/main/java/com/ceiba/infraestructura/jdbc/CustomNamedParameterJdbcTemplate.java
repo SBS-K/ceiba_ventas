@@ -27,6 +27,13 @@ public class CustomNamedParameterJdbcTemplate {
 		this.namedParameterJdbcTemplate.update(sql, paramSource,keyHolder,new String[] { "id" });
 		return keyHolder.getKey().longValue();
 	}
+
+	public Long crearConProfundidad(MapSqlParameterSource paramSourceSet,String sql) {
+		MapSqlParameterSource paramSource = paramSourceSet;
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		this.namedParameterJdbcTemplate.update(sql, paramSource,keyHolder,new String[] { "id" });
+		return keyHolder.getKey().longValue();
+	}
 	
 	public void actualizar(Object object,String sql) {
 		MapSqlParameterSource paramSource = crearParametros(object);
