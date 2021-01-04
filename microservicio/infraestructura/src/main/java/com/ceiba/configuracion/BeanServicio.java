@@ -6,7 +6,6 @@ import com.ceiba.compra.servicio.ServicioCrearCompra;
 import com.ceiba.compra.servicio.ServicioEliminarCompra;
 import com.ceiba.detalle_compra.puerto.repositorio.RepositorioDetalleCompra;
 import com.ceiba.detalle_compra.servicio.ServicioCrearDetalleCompra;
-import com.ceiba.detalle_compra.servicio.ServicioEliminarDetalleCompra;
 import com.ceiba.usuario.puerto.repositorio.RepositorioUsuario;
 import com.ceiba.usuario.servicio.ServicioActualizarUsuario;
 import com.ceiba.usuario.servicio.ServicioCrearUsuario;
@@ -52,11 +51,6 @@ public class BeanServicio {
     @Bean
     public ServicioCrearDetalleCompra servicioCrearDetalleCompra(RepositorioDetalleCompra repositorioDetalleCompra) {
         return new ServicioCrearDetalleCompra(repositorioDetalleCompra);
-    }
-
-    @Bean
-    public ServicioEliminarDetalleCompra servicioEliminarDetalleCompra(RepositorioDetalleCompra repositorioDetalleCompra) {
-        return new ServicioEliminarDetalleCompra(repositorioDetalleCompra);
     }
 
 }

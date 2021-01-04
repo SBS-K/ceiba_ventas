@@ -25,9 +25,16 @@ public interface RepositorioCompra {
 
     /**
      * Permite validar si existe una compra con un numeroFactura
+     * @param id
+     * @return si existe o no
+     */
+    boolean existe(Long id);
+
+    /**
+     * Permite validar si existe una compra con un numeroFactura
      * @param numeroFactura
      * @return si existe o no
      */
-    boolean existe(Long numeroFactura);
+    boolean existeByNumeroFactura(Long numeroFactura);
 
 }

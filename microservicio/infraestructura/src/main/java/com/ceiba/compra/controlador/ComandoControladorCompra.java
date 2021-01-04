@@ -32,17 +32,19 @@ public class ComandoControladorCompra {
         return manejadorCrearCompra.ejecutar(comandoCompra);
     }
 
+    @PutMapping(value="/{id}")
+    @ApiOperation("Actualizar Compra")
+    public void actualizar(@RequestBody ComandoCompra comandoCompra,@PathVariable Long id) {
+        comandoCompra.setId(id);
+        System.out.println("comandoCompra " + comandoCompra.getNumeroFactura());
+        manejadorActualizarCompra.ejecutar(comandoCompra);
+    }
+
     @DeleteMapping(value="/{id}")
     @ApiOperation("Eliminar Compra")
     public void eliminar(@PathVariable Long id) {
         manejadorEliminarCompra.ejecutar(id);
     }
 
-    @PutMapping(value="/{id}")
-    @ApiOperation("Actualizar Compra")
-    public void actualizar(@RequestBody ComandoCompra comandoCompra,@PathVariable Long id) {
-        comandoCompra.setId(id);
-        manejadorActualizarCompra.ejecutar(comandoCompra);
-    }
 
 }

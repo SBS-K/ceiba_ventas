@@ -24,7 +24,7 @@ public class ServicioCrearCompra {
     }
 
     private void validarExistenciaPrevia(Compra compra) {
-        boolean existe = this.repositorioCompra.existe(compra.getNumeroFactura());
+        boolean existe = this.repositorioCompra.existe(compra.getId());
         if(existe) {
             throw new ExcepcionDuplicidad(LA_COMPRA_YA_EXISTE_EN_EL_SISTEMA);
         }

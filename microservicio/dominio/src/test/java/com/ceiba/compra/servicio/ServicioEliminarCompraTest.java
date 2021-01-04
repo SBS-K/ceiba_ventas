@@ -4,14 +4,14 @@ import com.ceiba.BasePrueba;
 import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.compra.servicio.testdatabuilder.CompraTestDataBuilder;
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionNoExisteRegistroBD;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-public class ServicioCrearCompraTest {
+public class ServicioEliminarCompraTest {
 
-    private static final String LA_COMPRA_YA_EXISTE_EN_EL_SISTEMA = "La compra ya existe en el sistema";
+    private static final String LA_COMPRA_NO_EXISTE_EN_EL_SISTEMA = "La compra no existe en el sistema";
 
     private RepositorioCompra repositorioCompra;
 
@@ -25,11 +25,11 @@ public class ServicioCrearCompraTest {
 
         // Arrange
         Compra compra = new CompraTestDataBuilder().conId(1L).build();
-        Mockito.when(repositorioCompra.existe(Mockito.anyLong())).thenReturn(true);
-        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra);
+        Mockito.when(repositorioCompra.existe(Mockito.anyLong())).thenReturn(false);
+        ServicioEliminarCompra servicioEliminarCompra = new ServicioEliminarCompra(repositorioCompra);
         // Act - Assert
         BasePrueba.assertThrows(() ->
-                servicioCrearCompra.ejecutar(compra), ExcepcionDuplicidad.class, LA_COMPRA_YA_EXISTE_EN_EL_SISTEMA);
+                servicioEliminarCompra.ejecutar(compra.getId()), ExcepcionNoExisteRegistroBD.class, LA_COMPRA_NO_EXISTE_EN_EL_SISTEMA);
     }
 
 }

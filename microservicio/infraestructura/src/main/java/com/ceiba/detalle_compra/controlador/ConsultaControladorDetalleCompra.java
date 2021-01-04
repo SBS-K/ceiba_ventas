@@ -31,6 +31,6 @@ public class ConsultaControladorDetalleCompra {
 
     @GetMapping("/byCompraId/{compraId}")
     @ApiOperation("Listar Detalle de Compra")
-    public List<DtoDetalleCompra> listar(@PathVariable Long compraId) { return this.manejadorListaByIdCompraDetalleCompra.ejecutar(compraId); }
+    public List<DtoDetalleCompra> listarByCompraId(@PathVariable Long compraId) { return this.manejadorListaByIdCompraDetalleCompra.ejecutar(compraId); }
 
 }

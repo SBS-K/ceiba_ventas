@@ -1,4 +1,4 @@
-package com.ceiba.compra.controlador;
+package com.ceiba.detalle_compra.controlador;
 
 import com.ceiba.ApplicationMock;
 import org.junit.Test;
@@ -18,8 +18,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
-@WebMvcTest(ConsultaControladorCompra.class)
-public class ConsultaControladorCompraTest {
+@WebMvcTest(ConsultaControladorDetalleCompra.class)
+public class ConsultaControladorDetalleCompraTest {
+
+    private static final Long COMPRA_ID = 1L;
 
     @Autowired
     private MockMvc mocMvc;
@@ -29,11 +31,23 @@ public class ConsultaControladorCompraTest {
         // arrange
 
         // act - assert
-        mocMvc.perform(get("/compras")
+        mocMvc.perform(get("/detalleCompras")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", hasSize(4)))
-                .andExpect(jsonPath("$[0].numeroFactura", is(12345)));
+                .andExpect(jsonPath("$", hasSize(5)))
+                .andExpect(jsonPath("$[0].articulo.id", is(1)));
+    }
+
+    @Test
+    public void listarByCompraId() throws Exception {
+        // arrange
+
+        // act - assert
+        mocMvc.perform(get("/detalleCompras/byCompraId/{compraId}", COMPRA_ID)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$[0].articulo.id", is(1)));
     }
 
 }

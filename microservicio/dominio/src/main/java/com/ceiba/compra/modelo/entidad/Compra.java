@@ -23,7 +23,7 @@ public class Compra {
     // Horas de envio
     private static final Integer HORA_COMIENZO_DE_ENVIOS = 8;
     private static final Integer MINUTOS_COMIENZO_DE_ENVIOS = 0;
-    private static final Integer MINUTOS_HASTA_REALIZAR_ENVIOS = 15;
+    private static final Integer MINUTOS_HASTA_REALIZAR_ENVIOS = 30;
 
     // Otros
     private static final Integer UN_DIA = 1;
@@ -51,7 +51,7 @@ public class Compra {
 
         this.id = id;
         this.numeroFactura = numeroFactura;
-        this.costoTotal = siTieneRecargoCalcularCostoToal(fechaCompra, costoTotal);
+        this.costoTotal = siTieneRecargoCalcularCostoTotal(fechaCompra, costoTotal);
         this.estadoCompra = estadoCompra;
         this.listaDetalles = listaDetalles;
         this.fechaCompra = fechaCompra;
@@ -73,31 +73,29 @@ public class Compra {
     public void addDetalleCompra(DetalleCompra detalleCompra) { this.listaDetalles.add(detalleCompra); }
 
     // Comportamiento
-    private LocalDateTime calcularFechaEnvio(LocalDateTime fechaCompra) {
+    public LocalDateTime calcularFechaEnvio(LocalDateTime fechaCompra) {
 
         LocalDateTime fechaEnvio = null;
         if( esMayorALas6PmYMenorALas12AM(fechaCompra) ) { fechaEnvio = fechaCompra.plusDays(UN_DIA).withHour(HORA_COMIENZO_DE_ENVIOS).withMinute(MINUTOS_COMIENZO_DE_ENVIOS); }
-        else if ( esMayorALas12AMYMenorALas8AM (fechaCompra) ) { fechaEnvio = fechaCompra.withMinute(HORA_COMIENZO_DE_ENVIOS).withMinute(MINUTOS_COMIENZO_DE_ENVIOS); }
+        else if ( esMayorALas12AmYMenorALas8Am(fechaCompra) ) { fechaEnvio = fechaCompra.withMinute(HORA_COMIENZO_DE_ENVIOS).withMinute(MINUTOS_COMIENZO_DE_ENVIOS); }
         else { fechaEnvio = fechaCompra.plusMinutes(MINUTOS_HASTA_REALIZAR_ENVIOS); }
         return fechaEnvio;
     }
 
-    private boolean esMayorALas6PmYMenorALas12AM(LocalDateTime fechaEnvio) {
+    public boolean esMayorALas6PmYMenorALas12AM(LocalDateTime fechaCompra) {
         LocalDateTime seisPm = LocalDateTime.now().withHour(18).withMinute(0);
-        LocalDateTime finalDelDiaActual = LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT);
-
-        return fechaEnvio.isAfter(seisPm) && fechaEnvio.isBefore(finalDelDiaActual) ? true : false;
+        LocalDateTime finalDelDiaActual = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
+        return fechaCompra.isAfter(seisPm) && (fechaCompra.isBefore(finalDelDiaActual) || fechaCompra.isEqual(finalDelDiaActual)) ? true : false;
     }
 
-    private boolean esMayorALas12AMYMenorALas8AM(LocalDateTime fechaEnvio) {
-        LocalDateTime doceAm = LocalDateTime.now().withHour(12).withMinute(1);
+    public boolean esMayorALas12AmYMenorALas8Am(LocalDateTime fechaCompra) {
+        LocalDateTime doceAm = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
         LocalDateTime ochoAm = LocalDateTime.now().withHour(8).withMinute(0);
-
-        return fechaEnvio.isAfter(doceAm) && fechaEnvio.isBefore(ochoAm) ? true : false;
+        return fechaCompra.isAfter(doceAm) && fechaCompra.isBefore(ochoAm) ? true : false;
     }
 
     // Calculo de recargo
-    private Double siTieneRecargoCalcularCostoToal(LocalDateTime fechaCompra, Double costoTotal) {
+    public Double siTieneRecargoCalcularCostoTotal(LocalDateTime fechaCompra, Double costoTotal) {
         double costoFinal = costoTotal;
         if( esFinDeSemana(fechaCompra) && esMenorADocientosMilPesos(costoTotal) ) {
             costoFinal = calcularCostoTotalConPorcentajeRecargo(costoTotal);
@@ -105,15 +103,15 @@ public class Compra {
         return costoFinal;
     }
 
-    private Double calcularCostoTotalConPorcentajeRecargo(Double costoTotal) {
+    public Double calcularCostoTotalConPorcentajeRecargo(Double costoTotal) {
         return (costoTotal + ( (costoTotal * PORCENTAJE_RECARGO) / 100 ) );
     }
 
-    private boolean esMenorADocientosMilPesos(Double costoTotal) {
-        return costoTotal < 200000 ? true : false;
+    public boolean esMenorADocientosMilPesos(Double costoTotal) {
+        return costoTotal < 200000D ? true : false;
     }
 
-    private boolean esFinDeSemana(LocalDateTime fechaCompra) {
+    public boolean esFinDeSemana(LocalDateTime fechaCompra) {
         return (fechaCompra.getDayOfWeek().getValue() == SATURDAY || fechaCompra.getDayOfWeek().getValue() == SUNDAY) ? true : false;
     }
 

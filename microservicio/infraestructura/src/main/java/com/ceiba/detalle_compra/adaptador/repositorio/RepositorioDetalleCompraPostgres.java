@@ -14,10 +14,6 @@ public class RepositorioDetalleCompraPostgres implements RepositorioDetalleCompr
     @SqlStatement(namespace="detalle_compra", value="crear")
     private static String sqlCrear;
 
-    @SqlStatement(namespace="detalle_compra", value="eliminar")
-    private static String sqlEliminar;
-
-
     public RepositorioDetalleCompraPostgres(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -27,8 +23,4 @@ public class RepositorioDetalleCompraPostgres implements RepositorioDetalleCompr
         return this.customNamedParameterJdbcTemplate.crear(detalleCompra, sqlCrear);
     }
 
-    @Override
-    public void eliminar(Long id) {
-
-    }
 }
