@@ -13,50 +13,50 @@ public class RepositorioCompraPostgres implements RepositorioCompra {
     private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
     @SqlStatement(namespace="compra", value="crear")
-    private static String sqlCrear;
+    private static String sqlCrearCompra;
 
     @SqlStatement(namespace="compra", value="actualizar")
-    private static String sqlActualizar;
+    private static String sqlActualizarCompra;
 
     @SqlStatement(namespace="compra", value="eliminar")
-    private static String sqlEliminar;
+    private static String sqlEliminarCompra;
 
     @SqlStatement(namespace="compra", value="existe")
-    private static String sqlExiste;
+    private static String sqlExisteCompra;
 
     @SqlStatement(namespace="compra", value="existe_by_numero_factura")
-    private static String sqlExisteByNumeroFactura;
+    private static String sqlExisteCompraByNumeroFactura;
 
     public RepositorioCompraPostgres(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
 
     @Override
-    public Long crear(Compra compra) { return this.customNamedParameterJdbcTemplate.crear(compra, sqlCrear); }
+    public Long crear(Compra compra) { return this.customNamedParameterJdbcTemplate.crear(compra, sqlCrearCompra); }
 
     @Override
     public void actualizar(Compra compra) {
-        this.customNamedParameterJdbcTemplate.actualizar(compra, sqlActualizar);
+        this.customNamedParameterJdbcTemplate.actualizar(compra, sqlActualizarCompra);
     }
 
     @Override
     public void eliminar(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminarCompra, paramSource);
     }
 
     @Override
     public boolean existe(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste, paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteCompra, paramSource, Boolean.class);
     }
 
     @Override
     public boolean existeByNumeroFactura(Long numeroFactura) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("numeroFactura", numeroFactura);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteByNumeroFactura, paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteCompraByNumeroFactura, paramSource, Boolean.class);
     }
 }

@@ -2,14 +2,12 @@ package com.ceiba.articulo.modelo.entidad;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 import static com.ceiba.dominio.ValidadorArgumento.validarLongitud;
 import static com.ceiba.dominio.ValidadorArgumento.validarPositivo;
 
 @Getter
-@ToString
 @NoArgsConstructor
 public class Articulo {
 
