@@ -14,8 +14,8 @@ CREATE TABLE articulo (
 
 CREATE TABLE detalle_compra (
     id SERIAL PRIMARY KEY,
-    articulo_id int NOT NULL,
-    cantidad int NOT NULL,
+    articulo_id INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL,
     subtotal NUMERIC (15, 2) NOT NULL
 );
 ALTER TABLE detalle_compra
@@ -25,11 +25,11 @@ ALTER TABLE detalle_compra
 
 CREATE TABLE compra (
     id SERIAL PRIMARY KEY,
-    numero_factura SERIAL NOT NULL,
+    numero_factura INTEGER NULL,
     costo_total NUMERIC (15, 2) NOT NULL,
     estado_compra varchar(20) NOT NULL,
-    fecha_compra TIMESTAMP  NOT NULL,
-    fecha_envio TIMESTAMP  null
+    fecha_compra TIMESTAMP NOT NULL,
+    fecha_envio TIMESTAMP NOT NULL
 );
 
 CREATE TABLE compra_detalle_compra (
