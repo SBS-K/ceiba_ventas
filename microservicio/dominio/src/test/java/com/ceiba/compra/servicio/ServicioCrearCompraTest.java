@@ -43,7 +43,7 @@ public class ServicioCrearCompraTest {
         // Act
         Long compraDetalleCompraId = servicioCrearCompra.ejecutar(compra);
         // Assert
-        assertEquals(compraDetalleCompraId, COMPRA_ID);
+        assertEquals(COMPRA_ID, compraDetalleCompraId);
     }
 
     @Test

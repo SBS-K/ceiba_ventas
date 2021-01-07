@@ -32,7 +32,7 @@ public class ServicioCrearDetalleCompraTest {
         Long detalleCompraId = servicioCrearDetalleCompra.ejecutar(detalleCompra);
 
         // Assert
-        assertEquals(detalleCompraId, DETALLE_COMPRA_ID);
+        assertEquals(DETALLE_COMPRA_ID, detalleCompraId);
     }
 
 }

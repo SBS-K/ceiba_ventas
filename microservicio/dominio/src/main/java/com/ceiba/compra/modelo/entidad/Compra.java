@@ -42,12 +42,9 @@ public class Compra {
     private LocalDateTime fechaEnvio;
 
     public Compra(Long id, Long numeroFactura, Double costoTotal, String estadoCompra, List<DetalleCompra> listaDetalles, LocalDateTime fechaCompra) {
-        //validarPositivoLong(numeroFactura, EL_NUMERO_DE_COMPRA_DEBE_SER_MAYOR_A_CERO);
-        //validarObligatorio(numeroFactura, SE_DEBE_INGRESAR_EL_NUMERO_DE_LA_FACTURA);
         validarPositivo(costoTotal, EL_COSTO_TOTAL_DEBE_SER_MAYOR_A_CERO);
         validarObligatorio(costoTotal, SE_DEBE_INGRESAR_EL_COSTO_TOTAL);
         validarObligatorio(fechaCompra, SE_DEBE_INGRESAR_LA_FECHA_COMPRA);
-        //validarNoVacio(listaDetalles, LA_LISTA_DE_DETALLES_DE_COMPRA_NO_DEBE_SER_VACIA);
 
         this.id = id;
         this.numeroFactura = numeroFactura;
@@ -85,13 +82,13 @@ public class Compra {
     public boolean esMayorALas6PmYMenorALas12AM(LocalDateTime fechaCompra) {
         LocalDateTime seisPm = LocalDateTime.now().withHour(18).withMinute(0);
         LocalDateTime finalDelDiaActual = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
-        return fechaCompra.isAfter(seisPm) && (fechaCompra.isBefore(finalDelDiaActual) || fechaCompra.isEqual(finalDelDiaActual)) ? true : false;
+        return fechaCompra.isAfter(seisPm) && (fechaCompra.isBefore(finalDelDiaActual) || fechaCompra.isEqual(finalDelDiaActual));
     }
 
     public boolean esMayorALas12AmYMenorALas8Am(LocalDateTime fechaCompra) {
         LocalDateTime doceAm = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
         LocalDateTime ochoAm = LocalDateTime.now().withHour(8).withMinute(0);
-        return fechaCompra.isAfter(doceAm) && fechaCompra.isBefore(ochoAm) ? true : false;
+        return fechaCompra.isAfter(doceAm) && fechaCompra.isBefore(ochoAm);
     }
 
     // Calculo de recargo
@@ -108,11 +105,11 @@ public class Compra {
     }
 
     public boolean esMenorADocientosMilPesos(Double costoTotal) {
-        return costoTotal < 200000D ? true : false;
+        return costoTotal < 200000D;
     }
 
     public boolean esFinDeSemana(LocalDateTime fechaCompra) {
-        return (fechaCompra.getDayOfWeek().getValue() == SATURDAY || fechaCompra.getDayOfWeek().getValue() == SUNDAY) ? true : false;
+        return (fechaCompra.getDayOfWeek().getValue() == SATURDAY || fechaCompra.getDayOfWeek().getValue() == SUNDAY);
     }
 
 }

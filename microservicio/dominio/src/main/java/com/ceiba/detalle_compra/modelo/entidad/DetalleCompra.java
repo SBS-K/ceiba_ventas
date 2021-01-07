@@ -1,12 +1,8 @@
 package com.ceiba.detalle_compra.modelo.entidad;
 
-import lombok.Builder;
 import lombok.Getter;
-import lombok.AllArgsConstructor;
 import com.ceiba.articulo.modelo.entidad.Articulo;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
 import static com.ceiba.dominio.ValidadorArgumento.validarPositivo;

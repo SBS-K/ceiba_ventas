@@ -1,18 +1,13 @@
 package com.ceiba.compra.adaptador.dao;
 
-import com.ceiba.articulo.modelo.entidad.Articulo;
 import com.ceiba.compra.modelo.dto.DtoCompra;
-import com.ceiba.detalle_compra.modelo.entidad.DetalleCompra;
 import com.ceiba.infraestructura.jdbc.MapperResult;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 public class MapeoCompra implements RowMapper<DtoCompra>, MapperResult {
 
