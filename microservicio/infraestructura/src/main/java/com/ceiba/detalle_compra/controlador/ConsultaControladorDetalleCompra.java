@@ -1,7 +1,5 @@
 package com.ceiba.detalle_compra.controlador;
 
-import com.ceiba.articulo.consulta.ManejadorListarArticulos;
-import com.ceiba.articulo.modelo.dto.DtoArticulo;
 import com.ceiba.detalle_compra.consulta.ManejadorListaByIdCompraDetalleCompra;
 import com.ceiba.detalle_compra.consulta.ManejadorListarDetalleCompra;
 import com.ceiba.detalle_compra.modelo.dto.DtoDetalleCompra;

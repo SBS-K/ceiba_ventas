@@ -1,6 +1,5 @@
 package com.ceiba.compra_detalle_compra.adaptador;
 
-import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra_detalle_compra.modelo.entidad.CompraDetalleCompra;
 import com.ceiba.compra_detalle_compra.puerto.repository.RepositorioCompraDetalleCompra;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;

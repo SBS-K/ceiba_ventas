@@ -1,7 +1,6 @@
 package com.ceiba.compra.comando.manejador;
 
 import com.ceiba.compra.comando.fabrica.FabricaCompra;
-import com.ceiba.compra.servicio.ServicioCrearCompra;
 import com.ceiba.compra.servicio.ServicioEliminarCompra;
 import com.ceiba.manejador.ManejadorComando;
 import org.springframework.stereotype.Component;

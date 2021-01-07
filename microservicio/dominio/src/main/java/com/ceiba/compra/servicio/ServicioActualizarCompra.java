@@ -41,11 +41,11 @@ public class ServicioActualizarCompra {
         LocalDateTime fechaActual = LocalDateTime.now();
         Duration duration = Duration.between(fechaCompra, fechaActual);
         long hours = Math.abs(duration.toHours());
-        return hours > 24 ? true : false;
+        return hours > 24;
     }
 
     public boolean esDevolucion(String estadoCompra) {
-        return estadoCompra == ESTADO_DEVOLUCION ? true : false;
+        return estadoCompra.equals(ESTADO_DEVOLUCION);
     }
 
 }
