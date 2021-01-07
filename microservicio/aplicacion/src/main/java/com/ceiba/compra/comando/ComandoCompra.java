@@ -1,10 +1,7 @@
 package com.ceiba.compra.comando;
 
 import com.ceiba.detalle_compra.modelo.entidad.DetalleCompra;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ComandoCompra {
 
     private Long id;

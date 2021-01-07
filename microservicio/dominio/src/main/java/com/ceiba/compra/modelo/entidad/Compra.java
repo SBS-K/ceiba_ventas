@@ -42,8 +42,8 @@ public class Compra {
     private LocalDateTime fechaEnvio;
 
     public Compra(Long id, Long numeroFactura, Double costoTotal, String estadoCompra, List<DetalleCompra> listaDetalles, LocalDateTime fechaCompra) {
-        validarPositivoLong(numeroFactura, EL_NUMERO_DE_COMPRA_DEBE_SER_MAYOR_A_CERO);
-        validarObligatorio(numeroFactura, SE_DEBE_INGRESAR_EL_NUMERO_DE_LA_FACTURA);
+        //validarPositivoLong(numeroFactura, EL_NUMERO_DE_COMPRA_DEBE_SER_MAYOR_A_CERO);
+        //validarObligatorio(numeroFactura, SE_DEBE_INGRESAR_EL_NUMERO_DE_LA_FACTURA);
         validarPositivo(costoTotal, EL_COSTO_TOTAL_DEBE_SER_MAYOR_A_CERO);
         validarObligatorio(costoTotal, SE_DEBE_INGRESAR_EL_COSTO_TOTAL);
         validarObligatorio(fechaCompra, SE_DEBE_INGRESAR_LA_FECHA_COMPRA);

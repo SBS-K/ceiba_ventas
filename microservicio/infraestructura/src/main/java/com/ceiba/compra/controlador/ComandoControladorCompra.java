@@ -36,7 +36,6 @@ public class ComandoControladorCompra {
     @ApiOperation("Actualizar Compra")
     public void actualizar(@RequestBody ComandoCompra comandoCompra,@PathVariable Long id) {
         comandoCompra.setId(id);
-        System.out.println("comandoCompra " + comandoCompra.getNumeroFactura());
         manejadorActualizarCompra.ejecutar(comandoCompra);
     }
 
