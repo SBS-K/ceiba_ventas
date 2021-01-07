@@ -24,6 +24,9 @@ public class RepositorioUsuarioPostgres implements RepositorioUsuario {
     @SqlStatement(namespace="usuario", value="existe")
     private static String sqlExiste;
 
+    @SqlStatement(namespace="usuario", value="existeById")
+    private static String sqlExisteById;
+
     @SqlStatement(namespace="usuario", value="existeExcluyendoId")
     private static String sqlExisteExcluyendoId;
 
@@ -48,8 +51,14 @@ public class RepositorioUsuarioPostgres implements RepositorioUsuario {
     public boolean existe(String nombre) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("nombre", nombre);
-
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+    }
+
+    @Override
+    public boolean existeById(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExisteById,paramSource, Boolean.class);
     }
 
     @Override
