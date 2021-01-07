@@ -46,8 +46,14 @@ pipeline {
 
     stage('Unit Tests') {
       steps{
+        echo "------------>Clean Tests<------------"
+        sh 'gradle --b ./microservicio/build.gradle clean'
+
         echo "------------>Unit Tests<------------"
         sh 'gradle --b ./microservicio/build.gradle test'
+
+        echo "------------>JacocoTestReport Tests<------------"
+        sh 'gradle --b ./microservicio/build.gradle jacocoTestReport'
       }
     }
 
@@ -63,8 +69,7 @@ pipeline {
     stage('Build') {
       steps {
         echo "------------>Build<------------"
-        sh 'gradle --b ./microservicio/dominio/build.gradle build -x test'
-        sh 'gradle --b ./microservicio/infraestructura/build.gradle build -x test'
+        sh 'gradle --b ./microservicio/build.gradle build -x test'
       }
     }
   }
@@ -75,7 +80,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'microservicio/build/test-results/test/*.xml'
+      junit '**/build/test-results/test/*.xml'
     }
     failure {
       echo 'This will run only if failed'
